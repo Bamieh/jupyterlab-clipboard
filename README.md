@@ -3,8 +3,8 @@
 Paste images from clipboard into your notebook. [find it on npm](https://www.npmjs.com/package/jupyterlab-clipboard).
 
 
-What it does on pasting clipboard image:
-1. prompt user where to save image, defaulting in current directory.
+What it does on pasting clipboard images:
+1. prompts user for path to save image as, defaulting in `${cwd}/untitled.png`.
 2. saves image on confirmation.
 2. links image as markdown in the cell.
 
@@ -15,7 +15,6 @@ Current Limitations:
 - listens to paste event only
 - not sure about browser support.
 - does not warn on file overwrite
-
 
 ## Prerequisites
 
