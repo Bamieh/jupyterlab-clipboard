@@ -1,0 +1,47 @@
+{
+  "name": "jupyterlab-clipboard",
+  "version": "0.1.0",
+  "description": "Paste images from clipboard",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/Bamieh/jupyterlab-clipboard",
+  "bugs": {
+    "url": "https://github.com/Bamieh/jupyterlab-clipboard/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Bamieh",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bamieh/jupyterlab-clipboard.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.16.0",
+    "@jupyterlab/coreutils": "^2.0.0-1",
+    "@jupyterlab/filebrowser": "^0.16.3",
+    "@jupyterlab/fileeditor": "^0.16.3",
+    "@jupyterlab/notebook": "^0.16.3",
+    "@jupyterlab/services": "^3.0.0-1",
+    "@phosphor/widgets": "^1.6.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~2.6.0"
+  },
+  "jupyterlab": {
+    "extension": true
+  }
+}
