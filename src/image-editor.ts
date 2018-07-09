@@ -21,7 +21,7 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
   const getContent = (blob: Blob) : Promise<string> => {
     return new Promise(resolve => {
       reader.readAsDataURL(blob)
-      reader.onload = () => resolve(reader.result.replace(/^data:image\/png;base64,/, ''));
+      reader.onload = () => resolve(reader.result.replace(/^data:image\/.*?;base64,/, ''));
     })
   }
 
@@ -46,12 +46,12 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
     createMarkdownImageTag(path: string) {
       return `![](${path})`
     },
-    async saveImageAs(cwd: string, path:string, imageBlob: Blob) {
-      const blobType = "image/png";
+    async saveImageAs(cwd: string, path:string, image: Blob) {
+      const blobType = image.type;
 
       const name = PathExt.basename(path)
 
-      const content = new Blob([imageBlob], { type: blobType });
+      const content = new Blob([image], { type: blobType });
 
       const model: Partial<Contents.IModel> = {
         created: new Date().toISOString(),
@@ -64,7 +64,7 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
         writable: true,
         content: await getContent(content),
       }
-
+      console.log('app:::', app)
       await app.serviceManager.contents.save(path, model);
       return model;
     },

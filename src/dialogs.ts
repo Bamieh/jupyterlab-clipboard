@@ -15,10 +15,22 @@ function openPasteAsDialog(path: string, image?: Blob) : Promise<string | null> 
   }).then(result => result.button.label === 'SAVE' ? result.value : null)
 }
 
-// export
-// const confirmOverwriteDialog = () => {
 
-// }
+
+/**
+ * Ask the user whether to overwrite a file.
+ */
+export
+function shouldOverwrite(path: string): Promise<boolean> {
+  let options = {
+    title: 'Overwrite file?',
+    body: `"${path}" already exists, overwrite?`,
+    buttons: [Dialog.cancelButton(), Dialog.warnButton({ label: 'OVERWRITE' })]
+  };
+  return showDialog(options).then(result => {
+    return Promise.resolve(result.button.accept);
+  });
+}
 
 class SaveWidget extends Widget {
   inputElement: HTMLElement

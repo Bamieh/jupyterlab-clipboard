@@ -56,8 +56,10 @@ function activateJupyterlabClipboard(
   window.addEventListener("paste", async function(e: ClipboardEvent) {
     const clipboardImage = retrieveImageFromClipboardAsBlob(e).find(Boolean);
     if(!clipboardImage) return;
+
     const cwd = browser.model.path;
-    const defaultPath = PathExt.resolve(cwd, "untitled.png");
+
+    const defaultPath = PathExt.resolve(cwd, clipboardImage.name);
     const path = await openPasteAsDialog(defaultPath)
     if(!path) return;
 
