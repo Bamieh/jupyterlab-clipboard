@@ -54,13 +54,14 @@ function activateJupyterlabClipboard(
   } = imageEditor(app, notebooks);
 
   window.addEventListener("paste", async function(e: ClipboardEvent) {
-    const images = retrieveImageFromClipboardAsBlob(e);
+    const clipboardImage = retrieveImageFromClipboardAsBlob(e).find(Boolean);
+    if(!clipboardImage) return;
     const cwd = browser.model.path;
     const defaultPath = PathExt.resolve(cwd, "untitled.png");
     const path = await openPasteAsDialog(defaultPath)
     if(!path) return;
 
-    await saveImageAs(cwd, path, images[0]);
+    await saveImageAs(cwd, path, clipboardImage);
     const relativePath = PathExt.relative(cwd, path);
     const content = createMarkdownImageTag(relativePath)
     insertInCell(content);
