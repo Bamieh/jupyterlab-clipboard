@@ -28,7 +28,6 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
   return {
     insertInCell(content: string) {
       if(notebooks.activeCell) {
-        console.log('got active cell', notebooks.activeCell);
         const {line, column} = notebooks.activeCell.editor.getCursorPosition();
         const cellContent = notebooks.activeCell.editor.model.value;
         const newContent = cellContent.text.split("\n");
@@ -40,11 +39,18 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
           line: line + content.length,
           column: column
         });
-
       }
     },
     createMarkdownImageTag(path: string) {
       return `![](${path})`
+    },
+    async fileAlreadyExists(path: string) : Promise<Boolean> {
+      try {
+        await app.serviceManager.contents.get(path)
+        return true;
+      } catch(err) {
+        return false;
+      }
     },
     async saveImageAs(cwd: string, path:string, image: Blob) {
       const blobType = image.type;
@@ -64,7 +70,7 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
         writable: true,
         content: await getContent(content),
       }
-      console.log('app:::', app)
+
       await app.serviceManager.contents.save(path, model);
       return model;
     },

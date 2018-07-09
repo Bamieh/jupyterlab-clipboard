@@ -1,9 +1,10 @@
 export
 function retrieveImageFromClipboardAsBlob (pasteEvent:ClipboardEvent) {
   const items:any[] = [];
-  if(!pasteEvent.clipboardData) return items;
+  const clipboardData = pasteEvent.clipboardData || (window as any).clipboardData;
+  if(!clipboardData) return items;
 
-  let rawItems = pasteEvent.clipboardData.items;
+  let rawItems = clipboardData.items;
   if(!rawItems || ! rawItems.length) return items;
 
   for (let i = 0, len = rawItems.length; i < len; i++) {

@@ -21,7 +21,7 @@ function openPasteAsDialog(path: string, image?: Blob) : Promise<string | null> 
  * Ask the user whether to overwrite a file.
  */
 export
-function shouldOverwrite(path: string): Promise<boolean> {
+function openConfirmOverwriteDialog(path: string): Promise<boolean> {
   let options = {
     title: 'Overwrite file?',
     body: `"${path}" already exists, overwrite?`,

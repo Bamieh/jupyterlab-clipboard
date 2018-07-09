@@ -1,19 +1,25 @@
 # jupyterlab Clipboard
 
-Paste images from clipboard into your notebook. [find it on npm](https://www.npmjs.com/package/jupyterlab-clipboard).
+Paste images from clipboard into your notebook.
+[find it on npm](https://www.npmjs.com/package/jupyterlab-clipboard).
 
 
 What it does on pasting clipboard images:
 1. prompts user for path to save image as.
 2. saves image on confirmation.
-2. links image as markdown in the cell.
+3. links image as markdown in the cell.
 
-Current Limitations:
-- inserts markdown image tag for all kinds of cells, it should only do so with markdown for now at least.
-- the save as needs a small preview image
-- listens to paste event only
-- not sure about browser support.
-- does not warn on file overwrite
+
+## Browser support
+The most browser restrictive feature used in this extension is the clipboard. Support
+table can be [found here](https://caniuse.com/#feat=clipboard)
+
+- Chrome: 58 
+- Edge: (yes)
+- Firefox: 22
+- IE: 11
+- Opera: 45
+- Safari: (yes)
 
 ## Prerequisites
 
@@ -27,7 +33,8 @@ jupyter labextension install jupyterlab-clipboard
 
 ## Development
 
-For a development install (requires npm version 4 or later), do the following in the repository directory:
+For a development install (requires npm version 4 or later), do the following in the
+repository directory:
 
 ```bash
 npm install
@@ -41,3 +48,13 @@ To rebuild the package and the JupyterLab app:
 npm run build
 jupyter lab build
 ```
+
+### Todo
+If you want to jump in and help, here is my todo list:
+
+- [ ] detect active cell type and insert text based on that.
+- [ ] Add a small preview image in the the save as dialog.
+
+
+Please open an issue for taking on the development of an action item to avoid duplicating
+efforts.

@@ -19,7 +19,8 @@ import {
 } from './image-editor'
 
 import {
-  openPasteAsDialog
+  openPasteAsDialog,
+  openConfirmOverwriteDialog,
 } from './dialogs';
 
 
@@ -51,6 +52,7 @@ function activateJupyterlabClipboard(
     saveImageAs,
     insertInCell,
     createMarkdownImageTag,
+    fileAlreadyExists,
   } = imageEditor(app, notebooks);
 
   window.addEventListener("paste", async function(e: ClipboardEvent) {
@@ -61,6 +63,13 @@ function activateJupyterlabClipboard(
 
     const defaultPath = PathExt.resolve(cwd, clipboardImage.name);
     const path = await openPasteAsDialog(defaultPath)
+    const alreadyExists = await fileAlreadyExists(path)
+
+    if(alreadyExists) {
+      const overwrite = await openConfirmOverwriteDialog(path)
+      if(!overwrite) return;
+    }
+
     if(!path) return;
 
     await saveImageAs(cwd, path, clipboardImage);
