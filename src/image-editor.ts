@@ -21,7 +21,7 @@ const imageEditor = (app: JupyterLab, notebooks: INotebookTracker) => {
   const getContent = (blob: Blob) : Promise<string> => {
     return new Promise(resolve => {
       reader.readAsDataURL(blob)
-      reader.onload = () => resolve(reader.result.replace(/^data:image\/.*?;base64,/, ''));
+      reader.onload = () => resolve((<string>reader.result).replace(/^data:image\/.*?;base64,/, ''));
     })
   }
 
