@@ -24,7 +24,7 @@
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/templarbr/jupyterlab-clipboard.git"
+    "url": "https://github.com/Bamieh/jupyterlab-clipboard.git"
   },
   "scripts": {
     "build": "tsc",
